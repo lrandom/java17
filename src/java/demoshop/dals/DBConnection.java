@@ -36,7 +36,6 @@ public class DBConnection {
         try {
             if (this.connection != null) {
                 this.connection = null;
-
             }
         } catch (Exception e) {
             return false;
