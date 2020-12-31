@@ -32,6 +32,7 @@ public class ProductDAL extends DBConnection{
                   product.setName(rs.getString("name"));
                   product.setPrice(rs.getFloat("price"));
                   product.setContent(rs.getString("content"));
+                  product.setThumbnail(rs.getString("thumbnail"));
                   products.add(product);
               }
 
@@ -43,4 +44,22 @@ public class ProductDAL extends DBConnection{
         
     }
     
+    public Product getById(Long id){
+        try {
+          Statement stm = this.connection.createStatement();
+          String sql = "SELECT * FROM "+TABLE_NAME+" WHERE id="+id;
+          ResultSet rs = stm.executeQuery(sql);
+          rs.next();
+          Product product = new Product();
+                product.setId(rs.getLong("id"));
+                  product.setName(rs.getString("name"));
+                  product.setPrice(rs.getFloat("price"));
+                  product.setContent(rs.getString("content"));
+                  product.setThumbnail(rs.getString("thumbnail"));
+                  return product;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

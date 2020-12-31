@@ -3,21 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package session4;
+package demoshop.controllers;
 
+import demoshop.models.ProductInCart;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Lrandom
  */
-public class DemoCookieServlet extends HttpServlet {
+public class CartController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +38,10 @@ public class DemoCookieServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DemoCookieServlet</title>");            
+            out.println("<title>Servlet CartController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DemoCookieServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CartController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,38 +60,14 @@ public class DemoCookieServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        //set vào
-        //tạo cookie
-       //Cookie cookie = new Cookie("school", "NIIT");
-        //lưu trữ cookie ở máy khách
-        //response.addCookie(cookie);
+        ArrayList<ProductInCart> cart = new ArrayList<>();
+        HttpSession session = request.getSession();
+        if(session.getAttribute("cart")!=null){
+            cart = (ArrayList<ProductInCart>) session.getAttribute("cart");
+        }
         
-        //lấy ra
-        Cookie[] cookies =  request.getCookies();
-        Cookie cookie1 = getCookieByKey(cookies, "school");
-       
-        if(cookie1!=null){
-            PrintWriter writer = response.getWriter();
-            writer.print(cookie1.getValue());//NIIT
-            
-            //xoa cookie
-            cookie1.setMaxAge(0);
-            response.addCookie(cookie1);
-            ///cookie1.setMa
-            //Cookie cookie = new Cookie(cookie1.getName(), 
-             //       cookie1.getValue());
-            //cookie.setMaxAge(0);
-        }
-    }
-    
-    Cookie getCookieByKey(Cookie[] cookies, String key){
-        for (Cookie cooky : cookies) {
-            if(cooky.getName().equals(key)){
-                //cooky.setMaxAge(0);
-                return cooky;
-            }
-        }
-        return null;
+        request.setAttribute("cart", cart);
+        request.getRequestDispatcher("WEB-INF/cart.jsp").forward(request, response);
     }
 
     /**

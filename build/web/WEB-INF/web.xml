@@ -36,6 +36,18 @@
         <servlet-name>ProductController</servlet-name>
         <servlet-class>demoshop.controllers.ProductController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DemoServletForEach</servlet-name>
+        <servlet-class>session5.DemoServletForEach</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddToCartController</servlet-name>
+        <servlet-class>demoshop.controllers.AddToCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CartController</servlet-name>
+        <servlet-class>demoshop.controllers.CartController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -70,7 +82,19 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProductController</servlet-name>
-        <url-pattern>/ProductController</url-pattern>
+        <url-pattern>/products</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DemoServletForEach</servlet-name>
+        <url-pattern>/DemoServletForEach</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToCartController</servlet-name>
+        <url-pattern>/add-to-cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartController</servlet-name>
+        <url-pattern>/cart</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
